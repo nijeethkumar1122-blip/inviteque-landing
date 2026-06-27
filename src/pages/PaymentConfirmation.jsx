@@ -2,14 +2,12 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 const logo = "https://res.cloudinary.com/djbxuk2xr/image/upload/v1782036334/nuyo9eosd2rhpesywkt0.png"
-import { fadeUp } from '../motionVariants'
-
 export default function PaymentConfirmation() {
   const location = useLocation()
   const navigate = useNavigate()
   const [copied, setCopied] = useState(false)
   
-  const { orderId, inviteUrl, draftData, template, amount, templateId, isUpdate } = location.state || {}
+  const { orderId, inviteUrl, draftData, template, amount, isUpdate } = location.state || {}
 
   if (!orderId || !inviteUrl) {
     return (

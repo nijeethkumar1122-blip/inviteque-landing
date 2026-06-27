@@ -47,7 +47,9 @@ const petalConfig = Array.from({ length: 14 }).map((_, i) => {
   const duration = 6 + Math.random() * 8; // 6 to 14 seconds
   const delay = Math.random() * 5;
   const size = 15 + Math.random() * 20; // sizes between 15 and 35
-  return { left: leftPos, duration, delay, size };
+  const randX1 = Math.random() * 60 - 30;
+  const randX2 = Math.random() * 60 - 30;
+  return { left: leftPos, duration, delay, size, randX1, randX2 };
 });
 
 function FallingPetals() {
@@ -62,7 +64,7 @@ function FallingPetals() {
           style={{ left: `${p.left}%`, width: p.size, height: 'auto', opacity: 0.8 }}
           animate={{
             y: ['0vh', '110vh'],
-            x: [0, Math.random() * 60 - 30, Math.random() * 60 - 30],
+            x: [0, p.randX1, p.randX2],
             rotate: [0, 360],
           }}
           transition={{

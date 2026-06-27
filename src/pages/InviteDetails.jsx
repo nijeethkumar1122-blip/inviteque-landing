@@ -48,7 +48,7 @@ export default function InviteDetails() {
     }
 
     fetchInvite()
-  }, [code, user, navigate])
+  }, [code, user, navigate, logout])
 
   const handleCopyUrl = () => {
     const url = `${window.location.origin}/templates/${invite.templateId}/${invite.code}`

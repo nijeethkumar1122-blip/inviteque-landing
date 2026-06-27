@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react'
 import { useCloudinaryUpload } from '../hooks/useCloudinaryUpload'
-import { LazyImage } from './LazyImage'
 
 /**
  * Image Upload Component for Cloudinary

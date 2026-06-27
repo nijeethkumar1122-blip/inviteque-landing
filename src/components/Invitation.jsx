@@ -20,13 +20,21 @@ function AnimatedTitle({ text, className, style }) {
   )
 }
 
+function pseudoRandom(seed) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
 function ScatterText({ text }) {
   return (
     <div>
       {text.split('').map((char, index) => {
-        const randX = (Math.random() - 0.5) * 80;
-        const randY = (Math.random() - 0.5) * 80;
-        const randRot = (Math.random() - 0.5) * 90;
+        const seedX = index * 123.456;
+        const seedY = index * 789.101;
+        const seedRot = index * 345.678;
+        const randX = (pseudoRandom(seedX) - 0.5) * 80;
+        const randY = (pseudoRandom(seedY) - 0.5) * 80;
+        const randRot = (pseudoRandom(seedRot) - 0.5) * 90;
         return (
           <motion.span 
             key={index} 

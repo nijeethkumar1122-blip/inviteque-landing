@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 export default function LoginSuccess() {
   const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
   const { loginWithData } = useAuth()
 
   useEffect(() => {

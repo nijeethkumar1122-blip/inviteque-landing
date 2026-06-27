@@ -42,7 +42,7 @@ export default function Account() {
     }
 
     fetchInvites()
-  }, [user, navigate])
+  }, [user, navigate, logout])
 
   if (!user) return null
 

@@ -53,8 +53,6 @@ export default function Countdown({ data, isDesktop }) {
     { key: 'seconds', value: parts.seconds, label: labels.seconds },
   ]
 
-  const headerTop = String(data.headerTop || 'COUNTING DOWN TO')
-
   return (
     <section
       id={data.id || 'countdown'}

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { API_URL } from '../config'
@@ -5,24 +6,23 @@ import { API_URL } from '../config'
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('inviteque_user')
+    return savedUser ? JSON.parse(savedUser) : null
+  })
+  const [loading] = useState(false)
   const [toast, setToast] = useState(null)
 
   const showToast = (message, type = 'success') => {
-    setToast({ message, type })
     setTimeout(() => {
-      setToast(null)
-    }, 2000)
+      setToast({ message, type })
+      setTimeout(() => {
+        setToast(null)
+      }, 2000)
+    }, 0)
   }
 
   useEffect(() => {
-    // Check for saved session
-    const savedUser = localStorage.getItem('inviteque_user')
-    if (savedUser) {
-      setUser(JSON.parse(savedUser))
-    }
-
     // Check if we need to show flags
     if (localStorage.getItem('show_login_toast') === 'true') {
       showToast('Successfully logged in!')
@@ -34,8 +34,6 @@ export function AuthProvider({ children }) {
       showToast('Logged out successfully!')
       localStorage.removeItem('show_logout_toast')
     }
-
-    setLoading(false)
   }, [])
 
   const loginWithData = (userData) => {

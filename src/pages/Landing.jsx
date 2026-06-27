@@ -126,6 +126,12 @@ function ChooseTemplateVisual() {
   )
 }
 
+const names = [
+  { n1: "Rohan", n2: "Anaya" },
+  { n1: "Aaditya", n2: "Veera" },
+  { n1: "Abhishek", n2: "Meera" }
+]
+
 function CustomisePublishVisual() {
   const containerRef = useRef(null)
   const isInView = useInView(containerRef, { once: false, amount: 0.3 })
@@ -135,17 +141,11 @@ function CustomisePublishVisual() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [loopNum, setLoopNum] = useState(0)
 
-  const names = [
-    { n1: "Rohan", n2: "Anaya" },
-    { n1: "Aaditya", n2: "Veera" },
-    { n1: "Abhishek", n2: "Meera" }
-  ]
-
   useEffect(() => {
     if (!isInView) {
-      setDisplayText1("")
-      setDisplayText2("")
-      setIsDeleting(false)
+      setTimeout(() => setDisplayText1(prev => prev !== "" ? "" : prev), 0)
+      setTimeout(() => setDisplayText2(prev => prev !== "" ? "" : prev), 0)
+      setTimeout(() => setIsDeleting(prev => prev !== false ? false : prev), 0)
       return
     }
 
@@ -262,7 +262,7 @@ function ShareAnywhereVisual() {
 
   useEffect(() => {
     if (!isInView) {
-      setMsgCount(0)
+      setTimeout(() => setMsgCount(prev => prev !== 0 ? 0 : prev), 0)
       return
     }
 
@@ -473,39 +473,6 @@ function SectionLabel({ children }) {
   )
 }
 
-function PrimaryButton({ to, children, disabled = false }) {
-  const className = [
-    'inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition',
-    disabled
-      ? 'cursor-not-allowed bg-iqText/20 text-iqCard/80'
-      : 'bg-iqText text-iqCard shadow-luxury hover:opacity-95',
-  ].join(' ')
-
-  if (disabled) {
-    return (
-      <span aria-disabled="true" className={className}>
-        {children}
-      </span>
-    )
-  }
-
-  return (
-    <Link to={to} className={className}>
-      {children}
-    </Link>
-  )
-}
-
-function OutlineButton({ href, children }) {
-  return (
-    <a
-      href={href}
-      className="inline-flex items-center justify-center rounded-full border border-iqBorder bg-iqCard px-5 py-2.5 text-sm font-semibold text-iqText transition hover:bg-iqText/5"
-    >
-      {children}
-    </a>
-  )
-}
 
 function PricePill({ label }) {
   const isFree = String(label).toLowerCase().includes('free')

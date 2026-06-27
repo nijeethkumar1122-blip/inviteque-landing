@@ -14,6 +14,13 @@ export default function Payment() {
   const { draftData, templateId } = location.state || {}
   const { saveInvitation, user, loading: authLoading } = useAuth()
 
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [couponCode, setCouponCode] = useState('')
+  const [appliedCoupon, setAppliedCoupon] = useState(null)
+  const [couponError, setCouponError] = useState('')
+  const [couponSuccess, setCouponSuccess] = useState('')
+  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false)
+
   useEffect(() => {
     if (!authLoading && !user) {
       navigate('/login')
@@ -50,13 +57,6 @@ export default function Payment() {
       </div>
     )
   }
-
-  const [isProcessing, setIsProcessing] = useState(false)
-  const [couponCode, setCouponCode] = useState('')
-  const [appliedCoupon, setAppliedCoupon] = useState(null)
-  const [couponError, setCouponError] = useState('')
-  const [couponSuccess, setCouponSuccess] = useState('')
-  const [isValidatingCoupon, setIsValidatingCoupon] = useState(false)
 
   const isAlreadyPaid = draftData.status === 'PAID'
 

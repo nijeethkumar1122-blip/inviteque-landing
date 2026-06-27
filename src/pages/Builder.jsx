@@ -146,7 +146,7 @@ export default function Builder() {
   useEffect(() => {
     // If we have an editCode in the URL AND (we haven't loaded it yet OR it's different from what's in memory)
     if (editCode && (draftData.code !== editCode)) {
-      setLoading(true)
+      setTimeout(() => setLoading(true), 0)
       // Fetch existing data for editing
       fetch(`${API_URL}/api/invites/${editCode}`)
         .then(res => res.json())

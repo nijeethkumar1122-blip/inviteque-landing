@@ -60,8 +60,6 @@ function EventItem({ item, index, scrollY, isDesktop }) {
 }
 
 export default function Events({ data, isDesktop }) {
-  if (!data) return null
-
   const defaultEvents = [
     {
       time: "11:00 AM",
@@ -101,7 +99,8 @@ export default function Events({ data, isDesktop }) {
     }
   ]
 
-  const items = (data.items && data.items.length >= 3) ? data.items.map((item, i) => ({
+  const dataItems = data?.items
+  const items = (dataItems && dataItems.length >= 3) ? dataItems.map((item, i) => ({
     ...defaultEvents[i % defaultEvents.length], 
     time: item.time || defaultEvents[i % defaultEvents.length].time,
     name: item.name || defaultEvents[i % defaultEvents.length].name,
@@ -120,6 +119,8 @@ export default function Events({ data, isDesktop }) {
     })
     return () => controls.stop()
   }, [totalHeight, scrollY, items.length])
+
+  if (!data) return null
 
   return (
     <section 
